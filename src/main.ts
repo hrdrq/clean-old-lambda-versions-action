@@ -90,7 +90,7 @@ async function run(): Promise<void> {
     if (isNaN(numberToKeep)) {
       throw new Error('number_to_keep must be a number')
     }
-    const deleteVersionsWithAlias = core.getBooleanInput('delete_versions_with_alias')
+    const deleteVersionsWithAlias = core.getBooleanInput('delete_versions_with_alias', { required: false })
     const aliasedVersions = deleteVersionsWithAlias ? [] : await getAliasedVersions(functionName)
     const allVersions = await listAllVersions(functionName)
 
