@@ -107,24 +107,15 @@ function run() {
             if (isNaN(numberToKeep)) {
                 throw new Error('number_to_keep must be a number');
             }
-            let functionNames;
-            if (Array.isArray(functionName)) {
-                functionNames = functionName;
-            }
-            else {
-                functionNames = [functionName];
-            }
-            functionNames.forEach((functionName) => __awaiter(this, void 0, void 0, function* () {
-                const aliasedVersions = yield getAliasedVersions(functionName);
-                const allVersions = yield listAllVersions(functionName);
-                const removableVersions = allVersions.filter(v => {
-                    return !aliasedVersions.includes(v) && v !== '$LATEST';
-                });
-                const versionsToRemove = removableVersions.slice(0, removableVersions.length - numberToKeep);
-                core.info(`preparing to remove ${versionsToRemove.length} version(s)`);
-                const deleteVersions = versionsToRemove.map((v) => __awaiter(this, void 0, void 0, function* () { return deleteVersion(functionName, v); }));
-                yield Promise.all(deleteVersions);
-            }));
+            const aliasedVersions = yield getAliasedVersions(functionName);
+            const allVersions = yield listAllVersions(functionName);
+            const removableVersions = allVersions.filter(v => {
+                return !aliasedVersions.includes(v) && v !== '$LATEST';
+            });
+            const versionsToRemove = removableVersions.slice(0, removableVersions.length - numberToKeep);
+            core.info(`preparing to remove ${versionsToRemove.length} version(s)`);
+            const deleteVersions = versionsToRemove.map((v) => __awaiter(this, void 0, void 0, function* () { return deleteVersion(functionName, v); }));
+            yield Promise.all(deleteVersions);
         }
         catch (error) {
             const e = error;
