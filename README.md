@@ -1,7 +1,7 @@
 ### Clean Lambda Versions
 
 This action deletes lambda versions, keeping the most recent versions up to the number of versions specified.
-It will not attempt to delete any versions associated with an alias.
+It will not attempt to delete any versions associated with an alias by default.
 
 Requires the following environment variables:
 
@@ -15,6 +15,7 @@ Inputs:
 
 - function_name (required)
 - number_to_keep (required - keeps `number_to_keep` most recent versions not associated with an alias)
+- delete_versions_with_alias (not required - allow this action to delete versions associated with an alias)
 
 Usage:
 
