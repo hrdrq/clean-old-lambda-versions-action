@@ -8,6 +8,9 @@ inputs:
   number_to_keep:
     required: true
     description: 'number of versions to maintain'
+  delete_versions_with_alias:
+    required: false
+    description: 'allow to delete versions associated with an alias'
 runs:
   using: 'node20'
   main: 'dist/index.js'
